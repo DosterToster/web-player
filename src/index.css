@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
 .container {
     display: flex;
     background-color: #1e1e1e;
@@ -5,9 +11,15 @@
     height: 100vh;
     font-family: sans-serif;
     padding: 20px;
-    display: flex; 
-    gap: 40px;
+    gap: 20px;
     }
+
+.player {
+  width: 320px;       /* Кажемо: твоя ширина рівно 320px */
+  min-width: 320px;   /* Забороняємо стискатися */
+  max-width: 320px;   /* Забороняємо розтягуватися */
+}
+
 
 .player img {
     width: 300px;
@@ -15,7 +27,7 @@
     }
 
 .menu {
-    flex: 0 0 300px;
+    flex: 0 0 150px;
     padding: 20px;
     background-color: #2a2a2a;
 }

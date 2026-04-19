@@ -1,3 +1,5 @@
+import { SkipBack, Play, SkipForward } from "lucide-react"
+
 export default function Player() {
     return (
         <div className="player">
@@ -10,9 +12,9 @@ export default function Player() {
                 <span>0:00</span>   
             </div>
             <div className="controls">
-                <button>⏮️</button>
-                <button>⏯️</button>
-                <button>⏭️</button>
+                <button><SkipBack /></button>
+                <button><Play /></button>
+                <button><SkipForward /></button>
             </div>
         </div>
     )
