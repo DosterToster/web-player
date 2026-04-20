@@ -15,9 +15,9 @@
     }
 
 .player {
-  width: 320px;       /* Кажемо: твоя ширина рівно 320px */
-  min-width: 320px;   /* Забороняємо стискатися */
-  max-width: 320px;   /* Забороняємо розтягуватися */
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
 }
 
 

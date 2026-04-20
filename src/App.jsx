@@ -6,7 +6,7 @@ import Playlist from './components/Playlist'
 function App() {
   return (
     <div className="container app">
-      <Player />
+      <Player songName="Smile" artistName="Ashbury Heights" />
       <Playlist />
       <Sidebar />
     </div>

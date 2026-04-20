@@ -1,11 +1,11 @@
 import { SkipBack, Play, SkipForward } from "lucide-react"
 
-export default function Player() {
+export default function Player({ songName, artistName }) {
     return (
         <div className="player">
             <img src="Ena bbq.jpeg" alt="Album cover" /> 
-            <h1>Music Name</h1>
-            <h3>Artist Name</h3>
+            <h1>{songName}</h1>
+            <h3>{artistName}</h3>
             <div className="progress-bar">
                 <span>0:00</span>
                 <input type="range" />
