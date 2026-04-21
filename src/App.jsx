@@ -7,27 +7,43 @@ import { useState } from 'react'
 const songs = [
   { 
     id: 1, 
-    title: "K.", 
-    artist: "Cigarettes After Sex", 
-    duration: "5:20",
-    cover: "/Ena bbq.jpeg",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    title: "Spiders", 
+    artist: "Ashbury Heights", 
+    duration: "5:24", 
+    cover: "/завантаження (2).jpeg", 
+    audioUrl: "/Ashbury Heights - Spiders.mp3" 
   },
   { 
     id: 2, 
-    title: "Smile", 
-    artist: "Ashbury Heights", 
-    duration: "3:44",
-    cover: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=300&auto=format&fit=crop",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    title: "Born Slippy (Nuxx)", 
+    artist: "Underworld", 
+    duration: "4:24", 
+    cover: "/завантаження.jpeg", 
+    audioUrl: "/Underworld - Born Slippy (Nuxx).mp3" 
   },
   { 
     id: 3, 
-    title: "Goth", 
-    artist: "Sidewalks and Skeletons", 
-    duration: "3:27",
-    cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=300&auto=format&fit=crop",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    title: "Dancing in the Factory", 
+    artist: "And One", 
+    duration: "3:14", 
+    cover: "/завантаження (1).png", 
+    audioUrl: "/And One - Dancing in the Factory.mp3" 
+  },
+  { 
+    id: 4, 
+    title: "Traumfrau", 
+    artist: "And One", 
+    duration: "5:24", 
+    cover: "/завантаження.png", 
+    audioUrl: "/And One - Traumfrau.mp3" 
+  },
+  { 
+    id: 5, 
+    title: "Eternity at an End", 
+    artist: "Ashbury Heights", 
+    duration: "4:22", 
+    cover: "/завантаження (1).jpeg", 
+    audioUrl: "/Ashbury Heights - Eternity at an End.mp3" 
   }
 ];
 
