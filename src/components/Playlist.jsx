@@ -1,9 +1,4 @@
-export default function Playlist() {
-  const songs = [
-    { id: 1, title: "K.", artist: "Cigarettes After Sex", duration: "5:20" },
-    { id: 2, title: "Smile", artist: "Ashbury Heights", duration: "3:44" },
-    { id: 3, title: "Goth", artist: "Sidewalks and Skeletons", duration: "3:27" }
-  ];
+export default function Playlist({ songs, setSelectedSong }) {
 
   return (
     <div className="playlist">
@@ -16,7 +11,7 @@ export default function Playlist() {
       
       <ul>      
         {songs.map((song) => (
-          <li key={song.id}>
+          <li key={song.id} onClick={() => setSelectedSong(song)}>
             <span>{song.title}</span>
             <span>{song.artist}</span>
             <span>{song.duration}</span>
