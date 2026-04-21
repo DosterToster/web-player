@@ -53,7 +53,7 @@ function App() {
   const handleNext = () => {
     const currentIndex = songs.indexOf(selectedSong);
 
-    if (currentIndex === 2) {
+    if (currentIndex === songs.length - 1) { 
       setSelectedSong(songs[0]);
     } else {
       setSelectedSong(songs[currentIndex + 1]);
@@ -64,7 +64,7 @@ function App() {
     const currentIndex = songs.indexOf(selectedSong);
 
     if (currentIndex === 0) {
-      setSelectedSong(songs[2]);
+      setSelectedSong(songs[songs.length - 1]);
     } else {
       setSelectedSong(songs[currentIndex - 1]);
     }
