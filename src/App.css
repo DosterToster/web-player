@@ -1,27 +1,35 @@
-.playlist-header, 
+.playlist-header,
 .playlist ul li {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr; 
+  grid-template-columns: 2fr 2fr 1fr;
   align-items: center;
 }
 
-.playlist-header span:last-child, 
+.playlist-header span:last-child,
 .playlist ul li span:last-child {
   text-align: right;
 }
 
 /* Робимо кнопки прозорими */
 .controls button {
-  background: transparent; /* Прибираємо сірий фон */
-  border: none;            /* Прибираємо рамку */
-  color: white;            /* Робимо іконку білою */
-  cursor: pointer;         /* Курсор-рука при наведенні */
-  padding: 10px;           
-  transition: 0.2s;        /* Плавна анімація */
+  background: transparent;
+  /* Прибираємо сірий фон */
+  border: none;
+  /* Прибираємо рамку */
+  color: white;
+  /* Робимо іконку білою */
+  cursor: pointer;
+  /* Курсор-рука при наведенні */
+  padding: 10px;
+  transition: 0.2s;
+  /* Плавна анімація */
 }
 
 /* Додаємо ефект при наведенні мишки */
 .controls button:hover {
-  color: #1db954; /* Робимо зеленим (як у Spotify) при наведенні */
-  transform: scale(1.1); /* Трошки збільшуємо */
+  color: #1db954;
+  /* Робимо зеленим (як у Spotify) при наведенні */
+  transform: scale(1.1);
+  /* Трошки збільшуємо */
+  cursor: pointer;
 }

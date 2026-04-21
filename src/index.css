@@ -4,6 +4,12 @@
     font-family: 'Inter', sans-serif;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     background-color: #1e1e1e;
@@ -12,19 +18,19 @@
     font-family: sans-serif;
     padding: 20px;
     gap: 20px;
-    }
+}
 
 .player {
-  width: 320px;
-  min-width: 320px;
-  max-width: 320px;
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
 }
 
 
 .player img {
     width: 300px;
     border-radius: 10px;
-    }
+}
 
 .menu {
     flex: 0 0 150px;
@@ -34,6 +40,7 @@
 
 .menu li {
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .playlist {
@@ -48,6 +55,7 @@
     padding: 10px;
     background-color: #2a2a2a;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .playlist-header {
