@@ -10,26 +10,18 @@
   text-align: right;
 }
 
-/* Робимо кнопки прозорими */
 .controls button {
   background: transparent;
-  /* Прибираємо сірий фон */
   border: none;
-  /* Прибираємо рамку */
   color: white;
-  /* Робимо іконку білою */
   cursor: pointer;
-  /* Курсор-рука при наведенні */
   padding: 10px;
   transition: 0.2s;
-  /* Плавна анімація */
 }
 
-/* Додаємо ефект при наведенні мишки */
 .controls button:hover {
   color: #1db954;
-  /* Робимо зеленим (як у Spotify) при наведенні */
   transform: scale(1.1);
-  /* Трошки збільшуємо */
   cursor: pointer;
 }
+
