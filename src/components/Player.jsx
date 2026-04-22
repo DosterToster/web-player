@@ -1,52 +1,55 @@
-import { SkipBack, Play, Pause, SkipForward } from "lucide-react"
-import { useState, useRef } from "react"
+import { Pause, Play, SkipBack, SkipForward } from 'lucide-react'
+import { useRef, useState } from 'react'
 
 export default function Player({ songName, artistName, cover, audioUrl, onNext, onPrev })
-{const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const audioRef = useRef(null);
+{
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const audioRef = useRef(null)
 
     const togglePlayPause = () => {
         if (isPlaying) {
-            audioRef.current.pause();
+            audioRef.current.pause()
         } else {
-            audioRef.current.play();
+            audioRef.current.play()
         }
-    };
+    }
 
     return (
         <div className="player">
-            <img src={cover} alt="Album cover" /> 
+            <img src={cover} alt="Album cover" />
             <h1>{songName}</h1>
             <h3>{artistName}</h3>
-            <audio ref={audioRef}
+            <audio
+                ref={audioRef}
                 src={audioUrl}
-                autoPlay onPlay={() => setIsPlaying(true)}
+                autoPlay
+                onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-                onLoadedMetadata={(e) => setDuration(e.target.duration)}>
-            </audio>
+                onLoadedMetadata={(e) => setDuration(e.target.duration)}
+            />
             <div className="progress-bar">
                 <span>
                     {Math.floor(currentTime / 60)}:{String(Math.floor(currentTime % 60)).padStart(2, '0')}
                 </span>
-  
-                <input 
-                type="range" 
-                min={0} 
-                max={duration} 
-                value={currentTime} 
-                onChange={(e) => {
-                audioRef.current.currentTime = e.target.value
-                setCurrentTime(e.target.value)
-                }} 
-            />
+
+                <input
+                    type="range"
+                    min={0}
+                    max={duration}
+                    value={currentTime}
+                    onChange={(e) => {
+                        audioRef.current.currentTime = e.target.value
+                        setCurrentTime(e.target.value)
+                    }}
+                />
 
                 <span>
                     {Math.floor(duration / 60)}:{String(Math.floor(duration % 60)).padStart(2, '0')}
                 </span>
-                </div>
+            </div>
             <div className="controls">
                 <button onClick={onPrev}><SkipBack /></button>
                 <button onClick={togglePlayPause}>{isPlaying ? <Pause /> : <Play />}</button>

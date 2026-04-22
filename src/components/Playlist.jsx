@@ -1,5 +1,4 @@
 export default function Playlist({ songs, setSelectedSong }) {
-
   return (
     <div className="playlist">
       <h2>Playlist</h2>
@@ -8,8 +7,7 @@ export default function Playlist({ songs, setSelectedSong }) {
         <span>Artist</span>
         <span>Duration</span>
       </div>
-      
-      <ul>      
+      <ul>
         {songs.map((song) => (
           <li key={song.id} onClick={() => setSelectedSong(song)}>
             <span>{song.title}</span>
@@ -17,8 +15,7 @@ export default function Playlist({ songs, setSelectedSong }) {
             <span>{song.duration}</span>
           </li>
         ))}
-        
       </ul>
     </div>
-  );
+  )
 }

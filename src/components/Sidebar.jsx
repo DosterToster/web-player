@@ -1,5 +1,4 @@
-import { ListMusic, Mic2, Disc, Music, Heart, Settings }
-from "lucide-react";
+import { Disc, Heart, ListMusic, Mic2, Music, Settings } from 'lucide-react'
 
 export default function Sidebar() {
   return (
@@ -9,7 +8,7 @@ export default function Sidebar() {
         <li><Mic2 /> Artists</li>
         <li><Disc /> Albums</li>
         <li><Music /> Songs</li>
-        <li><Heart /> Favourite</li>
+        <li><Heart /> Favorites</li>
         <li><Settings /> Settings</li>
       </ul>
     </div>
