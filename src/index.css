@@ -20,23 +20,6 @@ body {
   gap: 20px;
 }
 
-.player {
-  width: 320px;
-  padding: 20px;
-  background-color: #121212;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.player img {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 .menu {
   flex: 0 0 150px;
   padding: 20px;
@@ -74,49 +57,4 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-}
-
-.progress-bar {
-  width: 300px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.progress-bar span {
-  font-size: 12px;
-  color: #b3b3b3;
-  min-width: 35px;
-}
-
-.progress-bar input[type='range'] {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.progress-bar input[type='range']::-webkit-slider-runnable-track {
-  background: #4f4f4f;
-  height: 4px;
-  border-radius: 2px;
-}
-
-.progress-bar input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -5px;
-  background-color: #828282;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-}
-
-.progress-bar input[type='range']:hover::-webkit-slider-thumb {
-  transform: scale(1.2);
-  background-color: orange;
 }
