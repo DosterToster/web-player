@@ -22,14 +22,27 @@
   object-fit: cover;
 }
 
+/* ── Скролінг назви ── */
 .title {
   overflow: hidden;
   width: 300px;
+  /* маска тільки з правого краю — щоб текст зліва не обрізався */
+  mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black 85%,
+    transparent 100%
+  );
 }
 
-.title h1 {
-  text-wrap: nowrap;
-  /* transform: translate(-20%, 0px); */
+.title_h1 {
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0;
+  padding: 8px 0;
+  font-size: 1.4rem;
+  will-change: transform;
 }
 
 .progress_bar {
