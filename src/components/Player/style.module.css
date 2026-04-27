@@ -22,11 +22,9 @@
   object-fit: cover;
 }
 
-/* ── Скролінг назви ── */
 .title {
   overflow: hidden;
   width: 300px;
-  /* маска тільки з правого краю — щоб текст зліва не обрізався */
   mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(
     to right,
@@ -88,4 +86,59 @@
 .progress_bar input[type='range']:hover::-webkit-slider-thumb {
   transform: scale(1.2);
   background-color: orange;
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 300px;
+  margin-top: 8px;
+}
+
+.volume_btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.volume_btn:hover {
+  color: #1db954;
+}
+
+.volume_slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.volume_slider::-webkit-slider-runnable-track {
+  background: #4f4f4f;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.volume_slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px;
+  background-color: #828282;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s;
+}
+
+.volume_slider:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background-color: #1db954;
 }

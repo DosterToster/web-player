@@ -1,7 +1,15 @@
-import { Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import {
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+  Volume1,
+  Volume2,
+  VolumeX,
+} from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import style from './style.module.css';
-import { animate, createScope } from 'animejs';
+import { animate } from 'animejs';
 
 export default function Player({
   songName,
@@ -14,6 +22,8 @@ export default function Player({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [prevVolume, setPrevVolume] = useState(1);
   const audioRef = useRef(null);
   const coverRef = useRef(null);
   const titleRef = useRef(null);
@@ -23,7 +33,6 @@ export default function Player({
   const scrollAnim = useRef(null);
   const scopeRef = useRef(null);
 
-  // Анімація обкладинки при зміні треку
   useEffect(() => {
     if (!coverRef.current) return;
 
@@ -35,14 +44,12 @@ export default function Player({
     });
   }, [cover]);
 
-  // Пульсація кнопки play/pause
   useEffect(() => {
     if (!playBtnRef.current) return;
 
     if (pulseAnim.current) {
       pulseAnim.current.pause();
       pulseAnim.current = null;
-      // скидаємо transform
       animate(playBtnRef.current, { scale: 1, duration: 150 });
     }
 
@@ -56,7 +63,6 @@ export default function Player({
     }
   }, [isPlaying]);
 
-  // Скролінг назви якщо вона не вміщується
   useEffect(() => {
     if (!titleRef.current || !titleInnerRef.current) return;
 
@@ -65,7 +71,6 @@ export default function Player({
       scrollAnim.current = null;
     }
 
-    // скидаємо позицію
     titleInnerRef.current.style.transform = 'translateX(0px)';
 
     const containerWidth = titleRef.current.offsetWidth;
@@ -73,7 +78,6 @@ export default function Player({
     const overflow = textWidth - containerWidth;
 
     if (overflow > 0) {
-      // затримка перед стартом скролу
       const timeout = setTimeout(() => {
         scrollAnim.current = animate(titleInnerRef.current, {
           translateX: [0, -overflow - 20],
@@ -96,6 +100,25 @@ export default function Player({
       audioRef.current.play();
     }
   };
+
+  const handleVolumeChange = (e) => {
+    const val = parseFloat(e.target.value);
+    setVolume(val);
+    audioRef.current.volume = val;
+  };
+
+  const toggleMute = () => {
+    if (volume > 0) {
+      setPrevVolume(volume);
+      setVolume(0);
+      audioRef.current.volume = 0;
+    } else {
+      setVolume(prevVolume);
+      audioRef.current.volume = prevVolume;
+    }
+  };
+
+  const VolumeIcon = volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   return (
     <div className={style.player}>
@@ -149,6 +172,20 @@ export default function Player({
         <button onClick={onNext}>
           <SkipForward />
         </button>
+      </div>
+      <div className={style.volume}>
+        <button className={style.volume_btn} onClick={toggleMute}>
+          <VolumeIcon size={18} />
+        </button>
+        <input
+          type='range'
+          min={0}
+          max={1}
+          step={0.01}
+          value={volume}
+          onChange={handleVolumeChange}
+          className={style.volume_slider}
+        />
       </div>
     </div>
   );
