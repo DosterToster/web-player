@@ -31,7 +31,6 @@ export default function Player({
   const playBtnRef = useRef(null);
   const pulseAnim = useRef(null);
   const scrollAnim = useRef(null);
-  const scopeRef = useRef(null);
 
   useEffect(() => {
     if (!coverRef.current) return;
