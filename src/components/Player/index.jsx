@@ -22,7 +22,9 @@ export default function Player({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(() => {
+    return parseFloat(localStorage.getItem('volume') ?? '1');
+  });
   const [prevVolume, setPrevVolume] = useState(1);
   const audioRef = useRef(null);
   const coverRef = useRef(null);
@@ -104,6 +106,7 @@ export default function Player({
     const val = parseFloat(e.target.value);
     setVolume(val);
     audioRef.current.volume = val;
+    localStorage.setItem('volume', val);
   };
 
   const toggleMute = () => {
@@ -136,8 +139,17 @@ export default function Player({
         autoPlay
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-        onLoadedMetadata={(e) => setDuration(e.target.duration)}
+        onTimeUpdate={(e) => {
+          setCurrentTime(e.target.currentTime);
+          if (Math.floor(e.target.currentTime) % 5 === 0) {
+            localStorage.setItem('currentTime', e.target.currentTime);
+          }
+        }}
+        onLoadedMetadata={(e) => {
+          setDuration(e.target.duration);
+          const saved = parseFloat(localStorage.getItem('currentTime') ?? '0');
+          audioRef.current.currentTime = saved;
+        }}
       />
       <div className={style.progress_bar}>
         <span>
