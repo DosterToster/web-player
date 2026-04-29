@@ -1,6 +1,11 @@
 import style from './style.module.css';
 
-export default function Playlist({ songs, setSelectedSong, selectedSong }) {
+export default function Playlist({
+  songs,
+  setSelectedSong,
+  selectedSong,
+  isPlaying,
+}) {
   return (
     <div className='playlist'>
       <h2>Playlist</h2>
@@ -17,13 +22,15 @@ export default function Playlist({ songs, setSelectedSong, selectedSong }) {
             className={song.id === selectedSong?.id ? style.active : ''}
           >
             <span className={style.song_title}>
-              {song.id === selectedSong?.id ? (
-                <span className={style.bars}>
+              {song.id === selectedSong?.id && (
+                <span
+                  className={`${style.bars} ${!isPlaying ? style.paused : ''}`}
+                >
                   <span />
                   <span />
                   <span />
                 </span>
-              ) : null}
+              )}
               {song.title}
             </span>
             <span className={style.song_artist}>{song.artist}</span>

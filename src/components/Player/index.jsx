@@ -1,6 +1,9 @@
 import {
+  Heart,
   Pause,
   Play,
+  Repeat,
+  Shuffle,
   SkipBack,
   SkipForward,
   Volume1,
@@ -18,8 +21,15 @@ export default function Player({
   audioUrl,
   onNext,
   onPrev,
+  liked,
+  onLike,
+  repeat,
+  shuffle,
+  onRepeat,
+  onShuffle,
+  isPlaying,
+  onPlayingChange,
 }) {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(() => {
@@ -36,7 +46,6 @@ export default function Player({
 
   useEffect(() => {
     if (!coverRef.current) return;
-
     animate(coverRef.current, {
       opacity: [0, 1],
       scale: [0.92, 1],
@@ -47,13 +56,11 @@ export default function Player({
 
   useEffect(() => {
     if (!playBtnRef.current) return;
-
     if (pulseAnim.current) {
       pulseAnim.current.pause();
       pulseAnim.current = null;
       animate(playBtnRef.current, { scale: 1, duration: 150 });
     }
-
     if (isPlaying) {
       pulseAnim.current = animate(playBtnRef.current, {
         scale: [1, 1.15, 1],
@@ -66,18 +73,14 @@ export default function Player({
 
   useEffect(() => {
     if (!titleRef.current || !titleInnerRef.current) return;
-
     if (scrollAnim.current) {
       scrollAnim.current.pause();
       scrollAnim.current = null;
     }
-
     titleInnerRef.current.style.transform = 'translateX(0px)';
-
     const containerWidth = titleRef.current.offsetWidth;
     const textWidth = titleInnerRef.current.scrollWidth;
     const overflow = textWidth - containerWidth;
-
     if (overflow > 0) {
       const timeout = setTimeout(() => {
         scrollAnim.current = animate(titleInnerRef.current, {
@@ -89,7 +92,6 @@ export default function Player({
           delay: 800,
         });
       }, 1000);
-
       return () => clearTimeout(timeout);
     }
   }, [songName]);
@@ -133,12 +135,19 @@ export default function Player({
         </h1>
       </div>
       <h3>{artistName}</h3>
+      <button
+        onClick={onLike}
+        className={style.like_btn}
+        style={{ color: liked ? '#feb200' : '#888' }}
+      >
+        <Heart size={20} fill={liked ? '#feb200' : 'none'} />
+      </button>
       <audio
         ref={audioRef}
         src={audioUrl}
         autoPlay
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        onPlay={() => onPlayingChange(true)}
+        onPause={() => onPlayingChange(false)}
         onTimeUpdate={(e) => {
           setCurrentTime(e.target.currentTime);
           if (Math.floor(e.target.currentTime) % 5 === 0) {
@@ -150,14 +159,20 @@ export default function Player({
           const saved = parseFloat(localStorage.getItem('currentTime') ?? '0');
           audioRef.current.currentTime = saved;
         }}
-        onEnded={onNext}
+        onEnded={() => {
+          if (repeat) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play();
+          } else {
+            onNext();
+          }
+        }}
       />
       <div className={style.progress_bar}>
         <span>
           {Math.floor(currentTime / 60)}:
           {String(Math.floor(currentTime % 60)).padStart(2, '0')}
         </span>
-
         <input
           type='range'
           min={0}
@@ -168,13 +183,15 @@ export default function Player({
             setCurrentTime(e.target.value);
           }}
         />
-
         <span>
           {Math.floor(duration / 60)}:
           {String(Math.floor(duration % 60)).padStart(2, '0')}
         </span>
       </div>
-      <div className='controls'>
+      <div className={style.controls}>
+        <button onClick={onShuffle}>
+          <Shuffle size={18} style={{ color: shuffle ? '#feb200' : 'white' }} />
+        </button>
         <button onClick={onPrev}>
           <SkipBack />
         </button>
@@ -183,6 +200,9 @@ export default function Player({
         </button>
         <button onClick={onNext}>
           <SkipForward />
+        </button>
+        <button onClick={onRepeat}>
+          <Repeat size={18} style={{ color: repeat ? '#feb200' : 'white' }} />
         </button>
       </div>
       <div className={style.volume}>

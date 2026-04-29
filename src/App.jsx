@@ -11,14 +11,25 @@ import { getSongs } from './api/songs.js';
 function App() {
   const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
-  const [activePage, setActivePage] = useState('playlist');
+  const [activePage, setActivePage] = useState(() => {
+    return localStorage.getItem('activePage') ?? 'playlist';
+  });
+  const [repeat, setRepeat] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
+  const [shuffledSongs, setShuffledSongs] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     getSongs().then((data) => {
-      setSongs(data);
+      const savedLikes = JSON.parse(localStorage.getItem('likedIds') ?? '[]');
+      const withLikes = data.map((s) => ({
+        ...s,
+        liked: savedLikes.includes(s.id),
+      }));
+      setSongs(withLikes);
       const lastId = localStorage.getItem('lastSongId');
-      const last = data.find((s) => s.id === Number(lastId));
-      setSelectedSong(last ?? data[0]);
+      const last = withLikes.find((s) => s.id === Number(lastId));
+      setSelectedSong(last ?? withLikes[0]);
     });
   }, []);
 
@@ -28,21 +39,70 @@ function App() {
     localStorage.removeItem('currentTime');
   };
 
+  const handleSetActivePage = (page) => {
+    setActivePage(page);
+    localStorage.setItem('activePage', page);
+  };
+
+  const handleLike = (id) => {
+    setSongs((prev) =>
+      prev.map((s) => {
+        if (s.id === id) {
+          const updated = { ...s, liked: !s.liked };
+          setSelectedSong(updated);
+          const savedLikes = JSON.parse(
+            localStorage.getItem('likedIds') ?? '[]'
+          );
+          const newLikes = updated.liked
+            ? [...savedLikes, id]
+            : savedLikes.filter((likedId) => likedId !== id);
+          localStorage.setItem('likedIds', JSON.stringify(newLikes));
+          return updated;
+        }
+        return s;
+      })
+    );
+  };
+
+  const handleShuffle = () => {
+    if (!shuffle) {
+      const arr = [...songs].filter((s) => s.id !== selectedSong.id);
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      setShuffledSongs([selectedSong, ...arr]);
+    }
+    setShuffle((prev) => !prev);
+  };
+
   const handleNext = () => {
-    const currentIndex = songs.indexOf(selectedSong);
-    if (currentIndex === songs.length - 1) {
-      setSelectedSong(songs[0]);
+    const list = shuffle ? shuffledSongs : songs;
+    const currentIndex = list.findIndex((s) => s.id === selectedSong.id);
+    if (currentIndex === list.length - 1) {
+      if (shuffle) {
+        const arr = [...songs];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        setShuffledSongs(arr);
+        setSelectedSong(arr[0]);
+      } else {
+        setSelectedSong(songs[0]);
+      }
     } else {
-      setSelectedSong(songs[currentIndex + 1]);
+      setSelectedSong(list[currentIndex + 1]);
     }
   };
 
   const handlePrevious = () => {
-    const currentIndex = songs.indexOf(selectedSong);
+    const list = shuffle ? shuffledSongs : songs;
+    const currentIndex = list.findIndex((s) => s.id === selectedSong.id);
     if (currentIndex === 0) {
-      setSelectedSong(songs[songs.length - 1]);
+      setSelectedSong(list[list.length - 1]);
     } else {
-      setSelectedSong(songs[currentIndex - 1]);
+      setSelectedSong(list[currentIndex - 1]);
     }
   };
 
@@ -54,6 +114,7 @@ function App() {
             songs={songs}
             setSelectedSong={handleSelectSong}
             selectedSong={selectedSong}
+            isPlaying={isPlaying}
           />
         );
       case 'albums':
@@ -63,7 +124,14 @@ function App() {
       case 'favorites':
         return <Favorites songs={songs} setSelectedSong={handleSelectSong} />;
       default:
-        return <Playlist songs={songs} setSelectedSong={handleSelectSong} />;
+        return (
+          <Playlist
+            songs={songs}
+            setSelectedSong={handleSelectSong}
+            selectedSong={selectedSong}
+            isPlaying={isPlaying}
+          />
+        );
     }
   };
 
@@ -76,11 +144,19 @@ function App() {
         artistName={selectedSong.artist}
         cover={selectedSong.cover}
         audioUrl={selectedSong.audioUrl}
+        liked={selectedSong.liked}
         onNext={handleNext}
         onPrev={handlePrevious}
+        onLike={() => handleLike(selectedSong.id)}
+        repeat={repeat}
+        shuffle={shuffle}
+        onRepeat={() => setRepeat((prev) => !prev)}
+        onShuffle={handleShuffle}
+        isPlaying={isPlaying}
+        onPlayingChange={setIsPlaying}
       />
       {renderPage()}
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      <Sidebar activePage={activePage} setActivePage={handleSetActivePage} />
     </div>
   );
 }

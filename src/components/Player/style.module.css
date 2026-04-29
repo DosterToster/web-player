@@ -157,3 +157,17 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+
+.like_btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  transition:
+    color 0.2s,
+    transform 0.2s;
+}
+
+.like_btn:hover {
+  transform: scale(1.2);
+}

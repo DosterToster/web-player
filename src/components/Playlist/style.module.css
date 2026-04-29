@@ -67,3 +67,67 @@
     transform: scaleY(1);
   }
 }
+
+.song_title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.song_artist {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active {
+  background-color: #1a1a1a;
+  border-left: 3px solid orange;
+}
+
+.bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.bars span {
+  display: inline-block;
+  width: 3px;
+  background-color: orange;
+  border-radius: 2px;
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+.bars span:nth-child(1) {
+  height: 8px;
+  animation-delay: 0s;
+}
+.bars span:nth-child(2) {
+  height: 14px;
+  animation-delay: 0.2s;
+}
+.bars span:nth-child(3) {
+  height: 6px;
+  animation-delay: 0.4s;
+}
+
+.paused span {
+  animation-play-state: paused;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
