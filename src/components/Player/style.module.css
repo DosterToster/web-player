@@ -108,7 +108,7 @@
 }
 
 .volume_btn:hover {
-  color: #1db954;
+  color: orange;
 }
 
 .volume_slider {
@@ -140,5 +140,5 @@
 
 .volume_slider:hover::-webkit-slider-thumb {
   transform: scale(1.2);
-  background-color: #1db954;
+  background-color: orange;
 }
