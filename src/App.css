@@ -1,15 +1,3 @@
-.playlist-header,
-.playlist ul li {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  align-items: center;
-}
-
-.playlist-header span:last-child,
-.playlist ul li span:last-child {
-  text-align: right;
-}
-
 .controls button {
   background: transparent;
   border: none;
@@ -20,8 +8,7 @@
 }
 
 .controls button:hover {
-  color: #1db954;
+  color: orange;
   transform: scale(1.1);
   cursor: pointer;
 }
-

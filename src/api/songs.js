@@ -17,7 +17,8 @@ const songs = [
   },
   {
     id: 3,
-    title: 'Dancing in the Factory',
+    title:
+      'Dancing in the Factoryaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     artist: 'And One',
     duration: '3:14',
     cover: '/завантаження (1).png',

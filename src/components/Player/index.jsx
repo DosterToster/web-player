@@ -150,6 +150,7 @@ export default function Player({
           const saved = parseFloat(localStorage.getItem('currentTime') ?? '0');
           audioRef.current.currentTime = saved;
         }}
+        onEnded={onNext}
       />
       <div className={style.progress_bar}>
         <span>

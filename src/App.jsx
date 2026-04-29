@@ -49,7 +49,13 @@ function App() {
   const renderPage = () => {
     switch (activePage) {
       case 'playlist':
-        return <Playlist songs={songs} setSelectedSong={handleSelectSong} />;
+        return (
+          <Playlist
+            songs={songs}
+            setSelectedSong={handleSelectSong}
+            selectedSong={selectedSong}
+          />
+        );
       case 'albums':
         return <Albums songs={songs} />;
       case 'artists':
