@@ -29,9 +29,11 @@ export default function Player({
   onShuffle,
   isPlaying,
   onPlayingChange,
+  onNavigate,
 }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [showMenu, setShowMenu] = useState(false);
   const [volume, setVolume] = useState(() => {
     return parseFloat(localStorage.getItem('volume') ?? '1');
   });
@@ -96,6 +98,18 @@ export default function Player({
     }
   }, [songName]);
 
+  useEffect(() => {
+    if (!showMenu) return;
+    const handler = () => setShowMenu(false);
+    const timeout = setTimeout(() => {
+      document.addEventListener('click', handler);
+    }, 0);
+    return () => {
+      clearTimeout(timeout);
+      document.removeEventListener('click', handler);
+    };
+  }, [showMenu]);
+
   const togglePlayPause = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -126,14 +140,10 @@ export default function Player({
 
   return (
     <div className={style.player}>
-      {/* Розмитий фон */}
-
-      {/* Обкладинка */}
       <div className={style.cover_wrap} ref={coverRef}>
         <img src={cover} alt='Album cover' className={style.cover_img} />
       </div>
 
-      {/* Назва і лайк */}
       <div className={style.meta}>
         <div className={style.text}>
           <div className={style.title} ref={titleRef}>
@@ -141,7 +151,37 @@ export default function Player({
               {songName}
             </span>
           </div>
-          <span className={style.artist}>{artistName}</span>
+          <div className={style.artist_wrap}>
+            <span
+              className={style.artist}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowMenu((prev) => !prev);
+              }}
+            >
+              {artistName}
+            </span>
+            {showMenu && (
+              <div className={style.menu}>
+                <button
+                  onClick={() => {
+                    onNavigate('albums');
+                    setShowMenu(false);
+                  }}
+                >
+                  Перейти до альбому
+                </button>
+                <button
+                  onClick={() => {
+                    onNavigate('artists');
+                    setShowMenu(false);
+                  }}
+                >
+                  Перейти до виконавця
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <button onClick={onLike} className={style.like_btn}>
           <Heart
@@ -152,7 +192,6 @@ export default function Player({
         </button>
       </div>
 
-      {/* Прогрес бар */}
       <div className={style.progress_bar}>
         <input
           type='range'
@@ -176,7 +215,6 @@ export default function Player({
         </div>
       </div>
 
-      {/* Контроли */}
       <div className={style.controls}>
         <button onClick={onShuffle} className={style.side_btn}>
           <Shuffle size={20} color={shuffle ? 'orange' : 'white'} />
@@ -199,7 +237,6 @@ export default function Player({
         </button>
       </div>
 
-      {/* Гучність */}
       <div className={style.volume}>
         <button className={style.volume_btn} onClick={toggleMute}>
           <VolumeIcon size={16} />

@@ -183,6 +183,7 @@ function App() {
         onShuffle={handleShuffle}
         isPlaying={isPlaying}
         onPlayingChange={setIsPlaying}
+        onNavigate={handleSetActivePage}
       />
       {renderPage()}
       <Sidebar activePage={activePage} setActivePage={handleSetActivePage} />
