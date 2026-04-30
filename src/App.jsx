@@ -119,9 +119,21 @@ function App() {
           />
         );
       case 'albums':
-        return <Albums songs={songs} />;
+        return (
+          <Albums
+            songs={songs}
+            selectedSong={selectedSong}
+            isPlaying={isPlaying}
+          />
+        );
       case 'artists':
-        return <Artists songs={songs} />;
+        return (
+          <Artists
+            songs={songs}
+            selectedSong={selectedSong}
+            isPlaying={isPlaying}
+          />
+        );
       case 'songs':
         return (
           <Songs
