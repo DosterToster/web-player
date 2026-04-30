@@ -38,8 +38,8 @@ export default function Player({
   const [prevVolume, setPrevVolume] = useState(1);
   const audioRef = useRef(null);
   const coverRef = useRef(null);
-  const titleRef = useRef(null);
   const titleInnerRef = useRef(null);
+  const titleRef = useRef(null);
   const playBtnRef = useRef(null);
   const pulseAnim = useRef(null);
   const scrollAnim = useRef(null);
@@ -126,22 +126,95 @@ export default function Player({
 
   return (
     <div className={style.player}>
-      <div className={style.player_img} ref={coverRef}>
-        <img src={cover} alt='Album cover' />
+      {/* Розмитий фон */}
+
+      {/* Обкладинка */}
+      <div className={style.cover_wrap} ref={coverRef}>
+        <img src={cover} alt='Album cover' className={style.cover_img} />
       </div>
-      <div className={style.title} ref={titleRef}>
-        <h1 className={style.title_h1} ref={titleInnerRef}>
-          {songName}
-        </h1>
+
+      {/* Назва і лайк */}
+      <div className={style.meta}>
+        <div className={style.text}>
+          <div className={style.title} ref={titleRef}>
+            <span className={style.title_inner} ref={titleInnerRef}>
+              {songName}
+            </span>
+          </div>
+          <span className={style.artist}>{artistName}</span>
+        </div>
+        <button onClick={onLike} className={style.like_btn}>
+          <Heart
+            size={22}
+            fill={liked ? 'orange' : 'none'}
+            color={liked ? 'orange' : 'white'}
+          />
+        </button>
       </div>
-      <h3>{artistName}</h3>
-      <button
-        onClick={onLike}
-        className={style.like_btn}
-        style={{ color: liked ? '#feb200' : '#888' }}
-      >
-        <Heart size={20} fill={liked ? '#feb200' : 'none'} />
-      </button>
+
+      {/* Прогрес бар */}
+      <div className={style.progress_bar}>
+        <input
+          type='range'
+          min={0}
+          max={duration}
+          value={currentTime}
+          onChange={(e) => {
+            audioRef.current.currentTime = e.target.value;
+            setCurrentTime(e.target.value);
+          }}
+        />
+        <div className={style.times}>
+          <span>
+            {Math.floor(currentTime / 60)}:
+            {String(Math.floor(currentTime % 60)).padStart(2, '0')}
+          </span>
+          <span>
+            -{Math.floor((duration - currentTime) / 60)}:
+            {String(Math.floor((duration - currentTime) % 60)).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
+
+      {/* Контроли */}
+      <div className={style.controls}>
+        <button onClick={onShuffle} className={style.side_btn}>
+          <Shuffle size={20} color={shuffle ? 'orange' : 'white'} />
+        </button>
+        <button onClick={onPrev} className={style.nav_btn}>
+          <SkipBack size={28} />
+        </button>
+        <button
+          ref={playBtnRef}
+          onClick={togglePlayPause}
+          className={style.play_btn}
+        >
+          {isPlaying ? <Pause size={28} /> : <Play size={28} />}
+        </button>
+        <button onClick={onNext} className={style.nav_btn}>
+          <SkipForward size={28} />
+        </button>
+        <button onClick={onRepeat} className={style.side_btn}>
+          <Repeat size={20} color={repeat ? 'orange' : 'white'} />
+        </button>
+      </div>
+
+      {/* Гучність */}
+      <div className={style.volume}>
+        <button className={style.volume_btn} onClick={toggleMute}>
+          <VolumeIcon size={16} />
+        </button>
+        <input
+          type='range'
+          min={0}
+          max={1}
+          step={0.01}
+          value={volume}
+          onChange={handleVolumeChange}
+          className={style.volume_slider}
+        />
+      </div>
+
       <audio
         ref={audioRef}
         src={audioUrl}
@@ -168,57 +241,6 @@ export default function Player({
           }
         }}
       />
-      <div className={style.progress_bar}>
-        <span>
-          {Math.floor(currentTime / 60)}:
-          {String(Math.floor(currentTime % 60)).padStart(2, '0')}
-        </span>
-        <input
-          type='range'
-          min={0}
-          max={duration}
-          value={currentTime}
-          onChange={(e) => {
-            audioRef.current.currentTime = e.target.value;
-            setCurrentTime(e.target.value);
-          }}
-        />
-        <span>
-          {Math.floor(duration / 60)}:
-          {String(Math.floor(duration % 60)).padStart(2, '0')}
-        </span>
-      </div>
-      <div className={style.controls}>
-        <button onClick={onShuffle}>
-          <Shuffle size={18} style={{ color: shuffle ? '#feb200' : 'white' }} />
-        </button>
-        <button onClick={onPrev}>
-          <SkipBack />
-        </button>
-        <button ref={playBtnRef} onClick={togglePlayPause}>
-          {isPlaying ? <Pause /> : <Play />}
-        </button>
-        <button onClick={onNext}>
-          <SkipForward />
-        </button>
-        <button onClick={onRepeat}>
-          <Repeat size={18} style={{ color: repeat ? '#feb200' : 'white' }} />
-        </button>
-      </div>
-      <div className={style.volume}>
-        <button className={style.volume_btn} onClick={toggleMute}>
-          <VolumeIcon size={18} />
-        </button>
-        <input
-          type='range'
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={handleVolumeChange}
-          className={style.volume_slider}
-        />
-      </div>
     </div>
   );
 }
