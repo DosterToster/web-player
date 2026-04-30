@@ -144,7 +144,14 @@ function App() {
           />
         );
       case 'favorites':
-        return <Favorites songs={songs} setSelectedSong={handleSelectSong} />;
+        return (
+          <Favorites
+            songs={songs}
+            setSelectedSong={handleSelectSong}
+            selectedSong={selectedSong}
+            isPlaying={isPlaying}
+          />
+        );
       default:
         return (
           <Playlist
