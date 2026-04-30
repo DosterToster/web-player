@@ -7,34 +7,36 @@ export default function Playlist({
   isPlaying,
 }) {
   return (
-    <div className='playlist'>
+    <div className={style.playlist}>
       <h2>Playlist</h2>
-      <div className='playlist-header'>
+      <div className={style.header}>
+        <span />
         <span>Title</span>
         <span>Artist</span>
         <span>Duration</span>
       </div>
-      <ul>
+      <ul className={style.list}>
         {songs.map((song) => (
           <li
             key={song.id}
             onClick={() => setSelectedSong(song)}
             className={song.id === selectedSong?.id ? style.active : ''}
           >
-            <span className={style.song_title}>
+            <div className={style.cover}>
+              <img src={song.cover} alt={song.title} />
               {song.id === selectedSong?.id && (
-                <span
+                <div
                   className={`${style.bars} ${!isPlaying ? style.paused : ''}`}
                 >
                   <span />
                   <span />
                   <span />
-                </span>
+                </div>
               )}
-              {song.title}
-            </span>
-            <span className={style.song_artist}>{song.artist}</span>
-            <span>{song.duration}</span>
+            </div>
+            <span className={style.title}>{song.title}</span>
+            <span className={style.artist}>{song.artist}</span>
+            <span className={style.duration}>{song.duration}</span>
           </li>
         ))}
       </ul>
