@@ -7,6 +7,7 @@ import Artists from './components/Artists/index.jsx';
 import Favorites from './components/Favorites/index.jsx';
 import { useState, useEffect } from 'react';
 import { getSongs } from './api/songs.js';
+import Songs from './components/Songs/index.jsx';
 
 function App() {
   const [songs, setSongs] = useState([]);
@@ -121,6 +122,15 @@ function App() {
         return <Albums songs={songs} />;
       case 'artists':
         return <Artists songs={songs} />;
+      case 'songs':
+        return (
+          <Songs
+            songs={songs}
+            setSelectedSong={handleSelectSong}
+            selectedSong={selectedSong}
+            isPlaying={isPlaying}
+          />
+        );
       case 'favorites':
         return <Favorites songs={songs} setSelectedSong={handleSelectSong} />;
       default:
