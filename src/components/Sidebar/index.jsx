@@ -1,7 +1,16 @@
-import { Disc, Heart, ListMusic, Mic2, Music, Settings } from 'lucide-react';
+import {
+  Disc,
+  Heart,
+  Library,
+  ListMusic,
+  Mic2,
+  Music,
+  Settings,
+} from 'lucide-react';
 import style from './style.module.css';
 
 const pages = [
+  { id: 'playlists', Icon: Library, label: 'Playlists' },
   { id: 'playlist', Icon: ListMusic, label: 'Playlist' },
   { id: 'artists', Icon: Mic2, label: 'Artists' },
   { id: 'albums', Icon: Disc, label: 'Albums' },

@@ -8,6 +8,8 @@ import Favorites from './components/Favorites/index.jsx';
 import { useState, useEffect } from 'react';
 import { getSongs } from './api/songs.js';
 import Songs from './components/Songs/index.jsx';
+import { usePlaylists } from './context/PlaylistContext.jsx';
+import Playlists from './components/Playlists/index.jsx';
 
 function App() {
   const [songs, setSongs] = useState([]);
@@ -19,6 +21,10 @@ function App() {
   const [shuffle, setShuffle] = useState(false);
   const [shuffledSongs, setShuffledSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { importFromUrl } = usePlaylists();
+  useEffect(() => {
+    importFromUrl();
+  }, [importFromUrl]);
 
   useEffect(() => {
     getSongs().then((data) => {
@@ -150,6 +156,14 @@ function App() {
             setSelectedSong={handleSelectSong}
             selectedSong={selectedSong}
             isPlaying={isPlaying}
+          />
+        );
+      case 'playlists':
+        return (
+          <Playlists
+            songs={songs}
+            setSelectedSong={handleSelectSong}
+            selectedSong={selectedSong}
           />
         );
       default:
