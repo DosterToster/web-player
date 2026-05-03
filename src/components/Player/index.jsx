@@ -255,7 +255,6 @@ export default function Player({
       <audio
         ref={audioRef}
         src={audioUrl}
-        autoPlay
         onPlay={() => onPlayingChange(true)}
         onPause={() => onPlayingChange(false)}
         onTimeUpdate={(e) => {
@@ -268,6 +267,9 @@ export default function Player({
           setDuration(e.target.duration);
           const saved = parseFloat(localStorage.getItem('currentTime') ?? '0');
           audioRef.current.currentTime = saved;
+          if (isPlaying) {
+            audioRef.current.play();
+          }
         }}
         onEnded={() => {
           if (repeat) {
