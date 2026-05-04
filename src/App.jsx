@@ -5,6 +5,7 @@ import Playlist from './components/Playlist/index.jsx';
 import Albums from './components/Albums/index.jsx';
 import Artists from './components/Artists/index.jsx';
 import Favorites from './components/Favorites/index.jsx';
+import Settings from './components/Settings/index.jsx';
 import { useState, useEffect } from 'react';
 import { getSongs } from './api/songs.js';
 import Songs from './components/Songs/index.jsx';
@@ -21,10 +22,19 @@ function App() {
   const [shuffle, setShuffle] = useState(false);
   const [shuffledSongs, setShuffledSongs] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') ?? 'dark';
+  });
   const { importFromUrl } = usePlaylists();
+
   useEffect(() => {
     importFromUrl();
   }, [importFromUrl]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     getSongs().then((data) => {
@@ -166,6 +176,8 @@ function App() {
             selectedSong={selectedSong}
           />
         );
+      case 'settings':
+        return <Settings theme={theme} setTheme={setTheme} />;
       default:
         return (
           <Playlist

@@ -1,0 +1,13 @@
+.controls button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.controls button:hover {
+  color: orange;
+  transform: scale(1.1);
+}
