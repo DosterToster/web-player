@@ -1,11 +1,10 @@
+import { useOutletContext } from 'react-router-dom';
 import style from './style.module.css';
 
-export default function Songs({
-  songs,
-  setSelectedSong,
-  selectedSong,
-  isPlaying,
-}) {
+export default function Songs() {
+  const { songs, selectedSong, setSelectedSong, isPlaying } =
+    useOutletContext();
+
   return (
     <div className={style.songs}>
       <h2>Songs</h2>

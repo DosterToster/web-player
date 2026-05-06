@@ -1,6 +1,9 @@
+import { useOutletContext } from 'react-router-dom';
 import style from './style.module.css';
 
-export default function Settings({ theme, setTheme }) {
+export default function Settings() {
+  const { theme, setTheme } = useOutletContext();
+
   return (
     <div className={style.settings}>
       <h2>Settings</h2>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { usePlaylists } from '../../context/PlaylistContext.jsx';
 import { Plus, Share2, Trash2, Pencil, Check, X } from 'lucide-react';
 import style from './style.module.css';
 
-export default function Playlists({ songs, setSelectedSong, selectedSong }) {
+export default function Playlists() {
+  const { songs, selectedSong, setSelectedSong } = useOutletContext();
   const {
     playlists,
     createPlaylist,

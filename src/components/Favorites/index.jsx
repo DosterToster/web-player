@@ -1,11 +1,9 @@
+import { useOutletContext } from 'react-router-dom';
 import style from './style.module.css';
 
-export default function Favorites({
-  songs,
-  setSelectedSong,
-  selectedSong,
-  isPlaying,
-}) {
+export default function Favorites() {
+  const { songs, selectedSong, setSelectedSong, isPlaying } =
+    useOutletContext();
   const favorites = songs.filter((s) => s.liked);
 
   return (

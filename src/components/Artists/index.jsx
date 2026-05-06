@@ -1,6 +1,8 @@
+import { useOutletContext } from 'react-router-dom';
 import style from './style.module.css';
 
-export default function Artists({ songs, selectedSong, isPlaying }) {
+export default function Artists() {
+  const { songs, selectedSong, isPlaying } = useOutletContext();
   const artists = [...new Set(songs.map((s) => s.artist))];
 
   return (
