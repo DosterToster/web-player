@@ -7,6 +7,7 @@
 .artists h2 {
   font-size: 1.8rem;
   margin-bottom: 16px;
+  color: var(--text);
 }
 
 .list {
@@ -30,12 +31,12 @@
 }
 
 .list li:hover {
-  background-color: #2a2a2a;
-  border-color: #3a3a3a;
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
 }
 
 .active {
-  background-color: #1a1a1a !important;
+  background-color: var(--bg-tertiary) !important;
   border-color: orange !important;
 }
 
@@ -109,7 +110,7 @@
 .name {
   font-size: 14px;
   font-weight: 500;
-  color: white;
+  color: var(--text);
 }
 
 .active .name {
@@ -118,5 +119,5 @@
 
 .count {
   font-size: 12px;
-  color: #b3b3b3;
+  color: var(--text-secondary);
 }
