@@ -8,7 +8,7 @@
   padding: 24px 20px;
   overflow: visible;
   gap: 16px;
-  background-color: #171717;
+  background-color: var(--bg-tertiary);
 }
 
 .cover_wrap {
@@ -58,7 +58,7 @@
   white-space: nowrap;
   font-size: 1.3rem;
   font-weight: 700;
-  color: white;
+  color: var(--text);
   will-change: transform;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .progress_bar input[type='range']::-webkit-slider-runnable-track {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--border);
   height: 4px;
   border-radius: 2px;
 }
@@ -102,7 +102,7 @@
   -webkit-appearance: none;
   appearance: none;
   margin-top: -5px;
-  background-color: white;
+  background-color: var(--text);
   height: 14px;
   width: 14px;
   border-radius: 50%;
@@ -118,7 +118,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-secondary);
 }
 
 .controls {
@@ -137,7 +137,7 @@
   cursor: pointer;
   padding: 8px;
   transition: transform 0.2s;
-  color: white;
+  color: var(--text);
 }
 
 .side_btn:hover {
@@ -148,7 +148,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--text);
   padding: 8px;
   transition: transform 0.2s;
 }
@@ -162,7 +162,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--text);
   padding: 8px;
   display: flex;
   align-items: center;
@@ -188,7 +188,7 @@
 .volume_btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -209,7 +209,7 @@
 }
 
 .volume_slider::-webkit-slider-runnable-track {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--border);
   height: 4px;
   border-radius: 2px;
 }
@@ -218,7 +218,7 @@
   -webkit-appearance: none;
   appearance: none;
   margin-top: -5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--text-secondary);
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -239,7 +239,7 @@
 
 .artist {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -255,20 +255,21 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background: #2a2a2a;
+  background: var(--bg-secondary);
   border-radius: 12px;
   padding: 8px 0;
   z-index: 999;
   min-width: 220px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   margin-top: 8px;
+  border: 1px solid var(--border);
 }
 
 .menu button {
   width: 100%;
-  background: #2a2a2a;
+  background: var(--bg-secondary);
   border: none;
-  color: white;
+  color: var(--text);
   padding: 12px 16px;
   text-align: left;
   cursor: pointer;
@@ -277,5 +278,5 @@
 }
 
 .menu button:hover {
-  background: #3a3a3a;
+  background: var(--bg-tertiary);
 }
