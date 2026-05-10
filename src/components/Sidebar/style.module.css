@@ -1,3 +1,7 @@
 .active {
   color: orange;
 }
+
+.active svg {
+  color: orange;
+}
