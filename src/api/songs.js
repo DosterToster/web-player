@@ -1,4 +1,6 @@
-const songs = [
+import axios from 'axios';
+
+const fallbackSongs = [
   {
     id: 1,
     title: 'Spiders',
@@ -46,8 +48,11 @@ const songs = [
   },
 ];
 
-export function getSongs() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(songs), 300);
-  });
+export async function getSongs() {
+  try {
+    const response = await axios.get('/api/songs');
+    return response.data;
+  } catch {
+    return fallbackSongs;
+  }
 }
