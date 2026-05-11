@@ -5,19 +5,22 @@ import Sidebar from '../Sidebar/index.jsx';
 import { usePlaylists } from '../../context/PlaylistContext.jsx';
 
 export default function Layout() {
-  const songs = useLoaderData();
+  const { songs } = useLoaderData();
   const navigate = useNavigate();
   const { importFromUrl } = usePlaylists();
 
   const [songsState, setSongsState] = useState(() => {
     const savedLikes = JSON.parse(localStorage.getItem('likedIds') ?? '[]');
-    return songs.map((s) => ({ ...s, liked: savedLikes.includes(s.id) }));
+    const data = Array.isArray(songs) ? songs : [];
+    return data.map((s) => ({ ...s, liked: savedLikes.includes(s.id) }));
   });
+
   const [selectedSong, setSelectedSong] = useState(() => {
     const lastId = localStorage.getItem('lastSongId');
     const last = songsState.find((s) => s.id === Number(lastId));
-    return last ?? songsState[0];
+    return last ?? songsState[0] ?? null;
   });
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
@@ -102,6 +105,8 @@ export default function Layout() {
       setSelectedSong(list[currentIndex - 1]);
     }
   };
+
+  if (!selectedSong) return <div>Завантаження...</div>;
 
   return (
     <div className='container app'>

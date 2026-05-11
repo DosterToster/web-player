@@ -11,7 +11,7 @@ import { getSongs } from './api/songs.js';
 
 const songsLoader = async () => {
   const songs = await getSongs();
-  return songs;
+  return { songs };
 };
 
 export const router = createBrowserRouter([

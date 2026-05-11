@@ -51,7 +51,10 @@ const fallbackSongs = [
 export async function getSongs() {
   try {
     const response = await axios.get('/api/songs');
-    return response.data;
+    if (Array.isArray(response.data) && response.data.length > 0) {
+      return response.data;
+    }
+    return fallbackSongs;
   } catch {
     return fallbackSongs;
   }
