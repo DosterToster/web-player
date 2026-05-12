@@ -1,0 +1,36 @@
+.bottom_nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bottom_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 0 20px 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+  }
+}
+
+.nav_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 12px;
+  transition: color 0.2s;
+  font-size: 10px;
+}
+
+.nav_btn:hover {
+  color: var(--text);
+}
+
+.active {
+  color: orange;
+}

@@ -1,0 +1,59 @@
+.desktop_player {
+  display: block;
+}
+
+.mobile_player {
+  display: none;
+}
+
+.mobile_bottom {
+  display: none;
+}
+
+.close_btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop_player {
+    display: none;
+  }
+
+  .mobile_bottom {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .mobile_player {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--bg-tertiary);
+    overflow-y: auto;
+  }
+
+  .close_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--bg-secondary);
+    border: none;
+    color: var(--text);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+  }
+}

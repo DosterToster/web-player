@@ -2,12 +2,16 @@ import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Player from '../Player/index.jsx';
 import Sidebar from '../Sidebar/index.jsx';
+import MiniPlayer from '../MiniPlayer/index.jsx';
+import BottomNav from '../BottomNav/index.jsx';
 import { usePlaylists } from '../../context/PlaylistContext.jsx';
+import style from './style.module.css';
 
 export default function Layout() {
   const { songs } = useLoaderData();
   const navigate = useNavigate();
   const { importFromUrl } = usePlaylists();
+  const [showFullPlayer, setShowFullPlayer] = useState(false);
 
   const [songsState, setSongsState] = useState(() => {
     const savedLikes = JSON.parse(localStorage.getItem('likedIds') ?? '[]');
@@ -108,25 +112,44 @@ export default function Layout() {
 
   if (!selectedSong) return <div>Завантаження...</div>;
 
+  const playerProps = {
+    songName: selectedSong.title,
+    artistName: selectedSong.artist,
+    cover: selectedSong.cover,
+    audioUrl: selectedSong.audioUrl,
+    liked: selectedSong.liked,
+    onNext: handleNext,
+    onPrev: handlePrevious,
+    onLike: () => handleLike(selectedSong.id),
+    repeat,
+    shuffle,
+    onRepeat: () => setRepeat((prev) => !prev),
+    onShuffle: handleShuffle,
+    isPlaying,
+    onPlayingChange: setIsPlaying,
+    onNavigate: navigate,
+  };
+
   return (
     <div className='container app'>
-      <Player
-        songName={selectedSong.title}
-        artistName={selectedSong.artist}
-        cover={selectedSong.cover}
-        audioUrl={selectedSong.audioUrl}
-        liked={selectedSong.liked}
-        onNext={handleNext}
-        onPrev={handlePrevious}
-        onLike={() => handleLike(selectedSong.id)}
-        repeat={repeat}
-        shuffle={shuffle}
-        onRepeat={() => setRepeat((prev) => !prev)}
-        onShuffle={handleShuffle}
-        isPlaying={isPlaying}
-        onPlayingChange={setIsPlaying}
-        onNavigate={navigate}
-      />
+      {/* Десктоп плеєр */}
+      <div className={style.desktop_player}>
+        <Player {...playerProps} />
+      </div>
+
+      {/* Мобільний повний плеєр */}
+      {showFullPlayer && (
+        <div className={style.mobile_player}>
+          <button
+            className={style.close_btn}
+            onClick={() => setShowFullPlayer(false)}
+          >
+            ✕
+          </button>
+          <Player {...playerProps} />
+        </div>
+      )}
+
       <Outlet
         context={{
           songs: songsState,
@@ -137,7 +160,20 @@ export default function Layout() {
           setTheme,
         }}
       />
+
       <Sidebar />
+
+      {/* Мобільний міні-плеєр і навігація */}
+      <div className={style.mobile_bottom}>
+        <MiniPlayer
+          song={selectedSong}
+          isPlaying={isPlaying}
+          onPlayPause={() => {}}
+          onNext={handleNext}
+          onClick={() => setShowFullPlayer(true)}
+        />
+        <BottomNav />
+      </div>
     </div>
   );
 }
