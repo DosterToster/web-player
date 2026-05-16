@@ -1,0 +1,168 @@
+.page {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.back_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.back_btn:hover {
+  color: orange;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.header h2 {
+  font-size: 1.8rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.count {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+}
+
+.list li:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+.active {
+  background: var(--bg-tertiary) !important;
+  border-color: orange !important;
+}
+
+.cover {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  padding-bottom: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+}
+
+.bars span {
+  display: inline-block;
+  width: 3px;
+  background-color: orange;
+  border-radius: 2px;
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+.bars span:nth-child(1) {
+  height: 8px;
+  animation-delay: 0s;
+}
+.bars span:nth-child(2) {
+  height: 14px;
+  animation-delay: 0.2s;
+}
+.bars span:nth-child(3) {
+  height: 6px;
+  animation-delay: 0.4s;
+}
+
+.paused span {
+  animation-play-state: paused;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active .title {
+  color: orange;
+}
+
+.duration {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}

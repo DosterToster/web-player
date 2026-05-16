@@ -1,8 +1,9 @@
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import style from './style.module.css';
 
 export default function Albums() {
   const { songs, selectedSong, isPlaying } = useOutletContext();
+  const navigate = useNavigate();
   const albums = [...new Map(songs.map((s) => [s.artist, s])).values()];
 
   return (
@@ -13,7 +14,13 @@ export default function Albums() {
           const albumSongs = songs.filter((s) => s.artist === album.artist);
           const isActive = albumSongs.some((s) => s.id === selectedSong?.id);
           return (
-            <li key={album.artist} className={isActive ? style.active : ''}>
+            <li
+              key={album.artist}
+              className={isActive ? style.active : ''}
+              onClick={() =>
+                navigate(`/artist/${encodeURIComponent(album.artist)}`)
+              }
+            >
               <div className={style.cover}>
                 <img src={album.cover} alt={album.artist} />
                 {isActive && (

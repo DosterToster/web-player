@@ -165,7 +165,7 @@ export default function Player({
               <div className={style.menu}>
                 <button
                   onClick={() => {
-                    onNavigate('albums');
+                    onNavigate(`/artist/${encodeURIComponent(artistName)}`);
                     setShowMenu(false);
                   }}
                 >
@@ -173,7 +173,7 @@ export default function Player({
                 </button>
                 <button
                   onClick={() => {
-                    onNavigate('artists');
+                    onNavigate('/artists');
                     setShowMenu(false);
                   }}
                 >

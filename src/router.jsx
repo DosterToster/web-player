@@ -8,6 +8,7 @@ import Favorites from './components/Favorites/index.jsx';
 import Playlists from './components/Playlists/index.jsx';
 import Settings from './components/Settings/index.jsx';
 import { getSongs } from './api/songs.js';
+import ArtistPage from './components/ArtistPage/index.jsx';
 
 const songsLoader = async () => {
   const songs = await getSongs();
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { path: 'favorites', element: <Favorites /> },
       { path: 'playlists', element: <Playlists /> },
       { path: 'settings', element: <Settings /> },
+      { path: 'artist/:artistName', element: <ArtistPage /> },
     ],
   },
 ]);
