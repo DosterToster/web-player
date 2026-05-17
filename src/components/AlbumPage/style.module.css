@@ -1,0 +1,128 @@
+.page {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.back_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.back_btn:hover {
+  color: orange;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.cover {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 1.6rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.artist {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+}
+
+.list li:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+.active {
+  background: var(--bg-tertiary) !important;
+  border-color: orange !important;
+}
+
+.index {
+  font-size: 13px;
+  color: var(--text-secondary);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.active .index {
+  color: orange;
+}
+
+.song_info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.song_title {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active .song_title {
+  color: orange;
+}
+
+.duration {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
