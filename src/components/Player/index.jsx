@@ -169,14 +169,6 @@ export default function Player({
                     setShowMenu(false);
                   }}
                 >
-                  Перейти до альбому
-                </button>
-                <button
-                  onClick={() => {
-                    onNavigate('/artists');
-                    setShowMenu(false);
-                  }}
-                >
                   Перейти до виконавця
                 </button>
               </div>

@@ -22,6 +22,68 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
+@media (max-width: 768px) {
+  .player {
+    width: 100%;
+    min-height: auto;
+    padding: 24px 18px 140px;
+    gap: 20px;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .cover_wrap {
+    width: min(100%, 88vw);
+    height: min(100%, 88vw);
+    border-radius: 28px;
+    margin-top: 32px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+  }
+
+  .meta {
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .text {
+    gap: 8px;
+  }
+
+  .title_inner {
+    font-size: 2rem;
+  }
+
+  .artist_wrap {
+    width: 100%;
+  }
+
+  .menu {
+    right: 0;
+    left: auto;
+    min-width: 220px;
+  }
+
+  .menu button {
+    padding: 14px 18px;
+  }
+
+  .controls {
+    gap: 12px;
+  }
+
+  .side_btn,
+  .nav_btn,
+  .play_btn,
+  .volume_btn {
+    padding: 10px;
+  }
+
+  .volume {
+    gap: 10px;
+  }
+}
+
 .cover_img {
   width: 100%;
   height: 100%;

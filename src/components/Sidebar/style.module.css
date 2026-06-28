@@ -1,3 +1,26 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  color: var(--text-secondary);
+}
+
+.menu li:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
 .active {
   color: orange;
 }

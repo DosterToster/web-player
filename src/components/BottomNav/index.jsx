@@ -11,8 +11,7 @@ import {
 import style from './style.module.css';
 
 const pages = [
-  { path: '/', Icon: ListMusic, label: 'Playlist' },
-  { path: '/songs', Icon: Music, label: 'Songs' },
+  { path: '/', Icon: ListMusic, label: 'Songs' },
   { path: '/favorites', Icon: Heart, label: 'Favorites' },
   { path: '/playlists', Icon: Library, label: 'Playlists' },
   { path: '/settings', Icon: Settings, label: 'Settings' },

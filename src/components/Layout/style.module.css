@@ -14,9 +14,19 @@
   display: none;
 }
 
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
 @media (max-width: 768px) {
   .desktop_player {
     display: none;
+  }
+
+  .content {
+    padding-bottom: 120px;
   }
 
   .mobile_bottom {

@@ -1,0 +1,62 @@
+.download {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.download h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header p {
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+.upload_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.upload_btn:hover {
+  background: var(--bg-tertiary);
+  border-color: orange;
+}
+
+.upload_input {
+  display: none;
+}
+
+.info_box {
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.info_box strong {
+  color: var(--text);
+}

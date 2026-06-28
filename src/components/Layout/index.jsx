@@ -11,7 +11,9 @@ export default function Layout() {
   const { songs } = useLoaderData();
   const navigate = useNavigate();
   const { importFromUrl } = usePlaylists();
-  const [showFullPlayer, setShowFullPlayer] = useState(false);
+  const [showFullPlayer, setShowFullPlayer] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 768
+  );
 
   const [songsState, setSongsState] = useState(() => {
     const savedLikes = JSON.parse(localStorage.getItem('likedIds') ?? '[]');
@@ -41,6 +43,61 @@ export default function Layout() {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  const parseFileName = (name) => {
+    const fileName = name.replace(/\.[^/.]+$/, '');
+    const [artist, title] = fileName.split(' - ');
+    return {
+      title: title?.trim() || fileName,
+      artist: artist?.trim() || 'Unknown Artist',
+    };
+  };
+
+  const formatDuration = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = Math.round(seconds % 60)
+      .toString()
+      .padStart(2, '0');
+    return `${m}:${s}`;
+  };
+
+  const getAudioDuration = (src) =>
+    new Promise((resolve) => {
+      const audio = new Audio(src);
+      audio.preload = 'metadata';
+      audio.addEventListener('loadedmetadata', () => {
+        resolve(formatDuration(audio.duration));
+      });
+      audio.addEventListener('error', () => {
+        resolve('0:00');
+      });
+      audio.src = src;
+    });
+
+  const handleUploadSongs = async (files) => {
+    const uploaded = await Promise.all(
+      Array.from(files).map(async (file) => {
+        const audioUrl = URL.createObjectURL(file);
+        const { title, artist } = parseFileName(file.name);
+        const duration = await getAudioDuration(audioUrl);
+        return {
+          id: Date.now() + Math.random(),
+          title,
+          artist,
+          duration,
+          cover: '/завантаження.png',
+          audioUrl,
+          liked: false,
+          source: 'upload',
+        };
+      })
+    );
+
+    setSongsState((prev) => [...prev, ...uploaded]);
+    if (uploaded.length > 0) {
+      setSelectedSong(uploaded[0]);
+    }
+  };
 
   const handleSelectSong = (song) => {
     setSelectedSong(song);
@@ -150,16 +207,19 @@ export default function Layout() {
         </div>
       )}
 
-      <Outlet
-        context={{
-          songs: songsState,
-          selectedSong,
-          setSelectedSong: handleSelectSong,
-          isPlaying,
-          theme,
-          setTheme,
-        }}
-      />
+      <div className={style.content}>
+        <Outlet
+          context={{
+            songs: songsState,
+            selectedSong,
+            setSelectedSong: handleSelectSong,
+            onUploadSongs: handleUploadSongs,
+            isPlaying,
+            theme,
+            setTheme,
+          }}
+        />
+      </div>
 
       <Sidebar />
 

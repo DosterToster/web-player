@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
+  box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
 
@@ -8,6 +9,19 @@ html,
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(255, 165, 0, 0.12), transparent 35%),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 20%
+    ),
+    var(--bg);
+  color: var(--text);
 }
 
 [data-theme='dark'] {
@@ -32,23 +46,27 @@ body {
   display: flex;
   background-color: var(--bg);
   color: var(--text);
-  height: 100vh;
+  min-height: 100vh;
   font-family: sans-serif;
   padding: 20px;
   gap: 20px;
 }
 
 .menu {
-  flex: 0 0 150px;
+  flex: 0 0 180px;
   padding: 20px;
-  background-color: var(--bg-secondary);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
 }
 
 .menu li {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   cursor: pointer;
   color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 ul {
@@ -57,11 +75,21 @@ ul {
   margin: 0;
 }
 
+@media (max-width: 1024px) {
+  .menu {
+    flex: 0 0 140px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     padding: 0;
-    height: 100dvh;
+    min-height: 100dvh;
     overflow: hidden;
+  }
+
+  .menu {
+    display: none;
   }
 }

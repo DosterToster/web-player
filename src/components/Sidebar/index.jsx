@@ -1,5 +1,6 @@
 import {
   Disc,
+  Download,
   Heart,
   Library,
   ListMusic,
@@ -11,11 +12,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import style from './style.module.css';
 
 const pages = [
+  { path: '/', Icon: ListMusic, label: 'Songs' },
+  { path: '/download', Icon: Download, label: 'Download' },
   { path: '/playlists', Icon: Library, label: 'Playlists' },
-  { path: '/', Icon: ListMusic, label: 'Playlist' },
-  { path: '/artists', Icon: Mic2, label: 'Artists' },
-  { path: '/albums', Icon: Disc, label: 'Albums' },
-  { path: '/songs', Icon: Music, label: 'Songs' },
   { path: '/favorites', Icon: Heart, label: 'Favorites' },
   { path: '/settings', Icon: Settings, label: 'Settings' },
 ];

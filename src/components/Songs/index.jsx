@@ -1,13 +1,35 @@
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import style from './style.module.css';
 
 export default function Songs() {
   const { songs, selectedSong, setSelectedSong, isPlaying } =
     useOutletContext();
+  const [search, setSearch] = useState('');
+
+  const filteredSongs = songs.filter((song) => {
+    const query = search.trim().toLowerCase();
+    if (!query) return true;
+    return (
+      song.title.toLowerCase().includes(query) ||
+      song.artist.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div className={style.songs}>
-      <h2>Songs</h2>
+      <div className={style.top_row}>
+        <h2>Songs</h2>
+        <div className={style.search_box}>
+          <input
+            type='search'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder='Пошук пісень або виконавців'
+            className={style.search_input}
+          />
+        </div>
+      </div>
       <div className={style.header}>
         <span />
         <span>Title</span>
@@ -15,7 +37,7 @@ export default function Songs() {
         <span>Duration</span>
       </div>
       <ul className={style.list}>
-        {songs.map((song) => (
+        {filteredSongs.map((song) => (
           <li
             key={song.id}
             onClick={() => setSelectedSong(song)}
